@@ -16,11 +16,27 @@ class MessageCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        
-        messageBubble.layer.cornerRadius = messageBubble.frame.size.height / 10
-        messageBubble.clipsToBounds = true
     }
-
+    
+//    override func layoutSubviews() {
+//        super.layoutSubviews()
+//        
+//        contentView.layoutIfNeeded()
+//        
+//        messageBubble.layer.cornerRadius = messageBubble.frame.size.height / 30
+//        messageBubble.clipsToBounds = true
+//    }
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        let h = messageBubble.bounds.height
+        // 8pt 이상, 20pt 이하 범위에서 적당히
+        let r = max(8, min(h / 2, 20))   // 캡슐형에 가깝게
+        messageBubble.layer.cornerRadius = r
+        messageBubble.clipsToBounds = true
+        
+    }
+    
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
